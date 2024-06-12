@@ -1,18 +1,21 @@
+import { Dispatch } from "react";
 import { formatCurrency } from "../helpers";
-import { MenuItem, OrderItem } from "../types";
+import { OrderItem } from "../types";
+import { OrderActions } from "../useReducer/user-reducer";
 
+//definimos el tipo de dato de los props
 type OrderContentsProps = {
   order: OrderItem[];
-  removeItem: (id: MenuItem["id"]) => void;
-};
-export default function OrderContents({
-  order,
-  removeItem,
-}: OrderContentsProps) {
+   dispatch: Dispatch<OrderActions>
+}
+
+export default function OrderContents({order,dispatch}: OrderContentsProps) {
+
   return (
     <div>
       <h2 className="font-black text-4xl">Consumo</h2>
       <div className="space-y-3 mt-10">
+        
         
         {  order.map((item) => (
             //el key se pone en el la primera etiqueta
@@ -32,7 +35,7 @@ export default function OrderContents({
 
               <button
                 className="bg-red-600 h-8 w-8 rounded-full text-white font-black"
-                onClick={() => removeItem(item.id)}
+                onClick={() => dispatch({type:'remove-item',payload:{item:item.id}})}
               >
                 X
               </button>

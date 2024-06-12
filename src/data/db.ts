@@ -1,5 +1,8 @@
+
+
 import type { MenuItem } from "../types"
 
+//a todos los objetos se tendran el tipo de dato de MenuItem
 export const menuItems:MenuItem []= [
    
    
